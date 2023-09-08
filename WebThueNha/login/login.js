@@ -17,10 +17,10 @@ let login = function () {
         console.log(response);
         if (response.role.name === "ROLE_ADMIN") {
             localStorage.setItem("token", response.token);
-            window.location.href = "admin.html";
+            window.location.href = "../admin/index.html";
         } else if (response.role.name === "ROLE_USER") {
             localStorage.setItem("token", response.token);
-            window.location.href = "user.html";
+            window.location.href = "../cozastore-master/index.html";
         }
     }).fail(function (xhr, status, error) {
         alert("Sai Username/Password");
@@ -31,6 +31,7 @@ let login = function () {
 let checkLogin = function () {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
+
     if (username !== "" && password !== "") {
         login();
     } else {
@@ -58,10 +59,9 @@ let signUp = function () {
         console.log(response);
         alert("tao thanh cong");
         window.location.href = "login-sign-up.html";
-
     }).fail(function (xhr, status, error) {
         console.log("Error:", error);
-        alert("Tài khoản đã tồn tại");
+        alert("tao khong thanh cong");
         window.location.href = "login-sign-up.html";
     });
 }
@@ -69,33 +69,27 @@ let signUp = function () {
 let checkSignUp = function () {
     let usernameT = document.getElementById("usernameC").value;
     let passwordT = document.getElementById("passwordC").value;
+
     if (usernameT !== "" && passwordT !== "") {
-            signUp();
+        checkSignUpAccount();
     } else {
         alert("ko");
     }
 }
 
-let checkPresentAccount = function () {
-    let usernameC = document.getElementById("usernameC").value;
-    let passwordC = document.getElementById("passwordC").value;
-    let roleId = 2;
-    let accountC = {username: usernameC, password: passwordC, role: {id: roleId}};
-
-    let settings = {
-        "url": "http://localhost:8080/account/checkAccount",
-        "method": "GET",
-        "timeout": 0,
-        "headers": {
-            "Content-Type": "application/json",
-            'Accept': 'application/json'
-        },
-        "data": JSON.stringify(accountC),
-    };
-
-    $.ajax(settings).done(function (response) {
-        if (response == "") {
-            alert("Tài khoản đã tồn tại");
+let checkSignUpAccount = function () {
+    let usernameCheck = document.getElementById("usernameC").value;
+    let flag = false;
+    for (const a of JSON.parse(localStorage.getItem("accountList"))) {
+        if (a.username === usernameCheck) {
+            flag = true;
+            break
         }
-    });
+    }
+
+    if (!flag) {
+        signUp();
+    } else {
+        alert("Tai khoan da co");
+    }
 }
