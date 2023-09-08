@@ -71,8 +71,25 @@ let checkSignUp = function () {
     let passwordT = document.getElementById("passwordC").value;
 
     if (usernameT !== "" && passwordT !== "") {
-        signUp();
+        checkSignUpAccount();
     } else {
         alert("ko");
+    }
+}
+
+let checkSignUpAccount = function () {
+    let usernameCheck = document.getElementById("usernameC").value;
+    let flag = false;
+    for (const a of JSON.parse(localStorage.getItem("accountList"))) {
+        if (a.username === usernameCheck) {
+            flag = true;
+            break
+        }
+    }
+
+    if (!flag) {
+        signUp();
+    } else {
+        alert("Tai khoan da co");
     }
 }
