@@ -17,7 +17,9 @@ let login = function () {
         console.log(response);
         if (response.role.name === "ROLE_ADMIN") {
             localStorage.setItem("token", response.token);
-            window.location.href = "admin.html";
+            // window.location.href = "admin.html";
+            window.location.href = "../cozastore-master/index.html";
+            // window.location.href = "../cozastore-master/product.html";
         } else if (response.role.name === "ROLE_USER") {
             localStorage.setItem("token", response.token);
             window.location.href = "user.html";
