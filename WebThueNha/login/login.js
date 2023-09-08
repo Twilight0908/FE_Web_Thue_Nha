@@ -20,7 +20,7 @@ let login = function () {
             window.location.href = "../admin/index.html";
         } else if (response.role.name === "ROLE_USER") {
             localStorage.setItem("token", response.token);
-            window.location.href = "user.html";
+            window.location.href = "../cozastore-master/index.html";
         }
     }).fail(function (xhr, status, error) {
         alert("Sai Username/Password");
