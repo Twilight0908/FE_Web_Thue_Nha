@@ -31,7 +31,6 @@ let login = function () {
 let checkLogin = function () {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
-
     if (username !== "" && password !== "") {
         login();
     } else {
@@ -59,9 +58,10 @@ let signUp = function () {
         console.log(response);
         alert("tao thanh cong");
         window.location.href = "login-sign-up.html";
+
     }).fail(function (xhr, status, error) {
         console.log("Error:", error);
-        alert("tao khong thanh cong");
+        alert("Tài khoản đã tồn tại");
         window.location.href = "login-sign-up.html";
     });
 }
@@ -69,10 +69,33 @@ let signUp = function () {
 let checkSignUp = function () {
     let usernameT = document.getElementById("usernameC").value;
     let passwordT = document.getElementById("passwordC").value;
-
     if (usernameT !== "" && passwordT !== "") {
-        signUp();
+            signUp();
     } else {
         alert("ko");
     }
+}
+
+let checkPresentAccount = function () {
+    let usernameC = document.getElementById("usernameC").value;
+    let passwordC = document.getElementById("passwordC").value;
+    let roleId = 2;
+    let accountC = {username: usernameC, password: passwordC, role: {id: roleId}};
+
+    let settings = {
+        "url": "http://localhost:8080/account/checkAccount",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            'Accept': 'application/json'
+        },
+        "data": JSON.stringify(accountC),
+    };
+
+    $.ajax(settings).done(function (response) {
+        if (response == "") {
+            alert("Tài khoản đã tồn tại");
+        }
+    });
 }
