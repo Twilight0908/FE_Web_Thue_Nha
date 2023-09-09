@@ -1990,7 +1990,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 /*---------------------------------------------*/
-.block1-name {color: #333;}
+.block1-name {color: #ff0000;font-family: "Times New Roman", Times, serif;font-weight: bold;text-transform: uppercase}
 .block1-info {color: #555;}
 
 /*---------------------------------------------*/

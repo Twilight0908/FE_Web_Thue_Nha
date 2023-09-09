@@ -1,3 +1,4 @@
+
 function showRoom(arrDataRoom) {
     let str = "";
     for (const room of arrDataRoom) {
@@ -11,7 +12,7 @@ function showRoom(arrDataRoom) {
 							<img src="${room.imageMain}" alt="IMG-PRODUCT" width="300" height="250">
 
 
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+							<a href="product-detail.html?id=${room.id}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" onclick="getRoomDetail(${room.id})">
 								Chi tiết
 							</a>
 						</div>
@@ -19,7 +20,7 @@ function showRoom(arrDataRoom) {
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 							
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 									${room.title}
 								</a>
 
@@ -60,7 +61,7 @@ function getAllRoom() {
 
 }
 
-getAllRoom();
+
 
 
 function getAllByCategory(idCategory){
@@ -81,5 +82,42 @@ function getAllByCategory(idCategory){
     })
 }
 
+function getRoomDetail(id) {
+    console.log(id)
+    $.ajax({
+        type:"GET",
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': "Bearer " + tokenData
+        },
+        url:"http://localhost:8080/room/edit/"+id,
+        success: function (data) {
+            localStorage.setItem("detailRoom",JSON.stringify(data));
+            // getRoomImages(id)
+            // location.href="product-detail.html";
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
 
+function getRoomImages(roomID) {
+    $.ajax({
+        type:"GET",
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': "Bearer " + tokenData
+        },
+        url:"http://localhost:8080/image/findImagesByRoomID/"+roomID,
+        success: function (data) {
+            localStorage.setItem("roomImages",JSON.stringify(data));
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+getAllRoom();
 getAllByCategory(0);

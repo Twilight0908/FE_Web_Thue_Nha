@@ -8,12 +8,14 @@ if (tokenData == null) { // neu tokenData == null thi chuyen huong sang trang lo
 
 function show(arrDataArea) {
     let str = "";
+    let i = 1;
     for (const area of arrDataArea) {
+        let categoryName= `category-${i}.jpg`;
         str += ` 
                 <!-- Block1 -->
             <div class="col-3">
                 <div class="block1 wrap-pic-w">
-                    <img src="images/banner-01.png" alt="IMG-BANNER">
+                    <img src="${categoryName}" alt="IMG-BANNER" width="300" height="300">
 
                     <a href="product.html?id=${area.id}"                                   
                        class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -26,6 +28,7 @@ function show(arrDataArea) {
                     </a>
                 </div>
             </div>`
+        i++;
     }
     document.getElementById("showArea").innerHTML = str;
 }

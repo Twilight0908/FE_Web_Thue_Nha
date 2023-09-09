@@ -1,6 +1,5 @@
 let url = new URL(location.href);
 let idArea = url.searchParams.get("id");
-
 let tokenData = localStorage.getItem("token") //forgot to close
 if (tokenData == null) { // neu tokenData == null thi chuyen huong sang trang login
     window.location.href = "http://localhost:8080/login" // chuyen huong sang trang login
