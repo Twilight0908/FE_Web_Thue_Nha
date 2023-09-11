@@ -1,5 +1,5 @@
-let url = new URL(location.href);
-let idArea = url.searchParams.get("id");
+let url = new URL(location.href); // la 1 doi tuong URL cua JS de lay du lieu tu url
+let idArea = url.searchParams.get("id"); // lay id tu url
 
 let tokenData = localStorage.getItem("token") //forgot to close
 if (tokenData == null) { // neu tokenData == null thi chuyen huong sang trang login
